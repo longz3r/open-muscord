@@ -4,7 +4,7 @@ const temp = require('temp').track();
 const getFirstYoutubeVideo = require("../functions/getFirstYTvideo")
 const { join } = require('node:path');
 const downloadAudio = require("../functions/downloadAudio.js")
-const ytdl = require("ytdl-core")
+const playdl = require("play-dl")
 
 async function playAudio(connection, resource) {
     const player = createAudioPlayer({
@@ -12,11 +12,6 @@ async function playAudio(connection, resource) {
             noSubscriber: NoSubscriberBehavior.Pause,
         },
     });
-
-    // const player = createAudioPlayer();
-
-    
-    // const resource = createAudioResource(stream);
 
     await player.play(resource);
     connection.subscribe(player);
@@ -45,30 +40,31 @@ async function play(interaction) {
     let video
     let videoTitle
     if (query.startsWith("https://www.youtube.com/watch?v=")) {
-        videoId = query
-        videoTitle = query
+        const pattern = /\/watch\?v=([A-Za-z0-9_-]+)/;
+        const match = query.match(pattern);
+        videoId = match[1];
+        videoTitle = "https://www.youtube.com/watch?v=" + videoId
     } else {
         video = await getFirstYoutubeVideo(query + "official")
         videoId = video.id
         videoTitle = video.title
     }
 
-    interaction.reply(`Playing ${videoTitle}`);
+    interaction.reply(`Playing **${videoTitle}**`);
 
-    // const tempFilePath = temp.path({ suffix: '.mp3', dir: './data/audios' });
-    // var resource
-    // try {
-    //     await downloadAudio(videoId, tempFilePath);
-    //     resource = await createAudioResource(tempFilePath);
-
-    //     // Play the audio resource
-    // } catch (error) {
-    //     console.error('Error:', error.message);
-    // }
-    const stream = await ytdl(videoId, {
-        filter: "audioonly"
-    });
-    const resource = createAudioResource(stream);
+    
+    // const relativePath = `../../data/audios/${videoId}.mp3`;
+    // const absolutePath = join(__dirname, relativePath);
+    // await downloadAudio(videoId, absolutePath)
+    // const resource = createAudioResource(absolutePath);
+    
+    // const stream = await ytdl(videoId, {
+    //     filter: "audioonly"
+    // });
+    let stream = await playdl.stream("https://www.youtube.com/watch?v=" + videoId)
+    let resource = createAudioResource(stream.stream, {
+        inputType: stream.type
+    })
 
 
     if (connection === undefined) {

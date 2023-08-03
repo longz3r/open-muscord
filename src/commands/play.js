@@ -26,12 +26,13 @@ async function playAudio(connection, resource) {
     });
 
     // Clean up resources when playback ends
-    // player.on('stateChange', (oldState, newState) => {
-    //     if (newState.status === 'idle') {
-    //         player.stop();
-    //         connection.destroy();
-    //     }
-    // });
+    player.on('stateChange', (oldState, newState) => {
+        console.log(newState.status)
+        // if (newState.status === 'idle') {
+        //     player.stop();
+        //     connection.destroy();
+        // }
+    });
 }
 
 async function play(interaction) {

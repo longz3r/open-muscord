@@ -1,9 +1,10 @@
 const { joinVoiceChannel, getVoiceConnection, createAudioPlayer, NoSubscriberBehavior, createAudioResource, generateDependencyReport } = require("@discordjs/voice");
 
-const ytdl = require("ytdl-core")
+const temp = require('temp').track();
 const getFirstYoutubeVideo = require("../functions/getFirstYTvideo")
 const { join } = require('node:path');
 const downloadAudio = require("../functions/downloadAudio.js")
+const ytdl = require("ytdl-core")
 
 async function playAudio(connection, resource) {
     const player = createAudioPlayer({
@@ -28,30 +29,48 @@ async function playAudio(connection, resource) {
     // Clean up resources when playback ends
     player.on('stateChange', (oldState, newState) => {
         console.log(newState.status)
-        // if (newState.status === 'idle') {
-        //     player.stop();
-        //     connection.destroy();
-        // }
+        if (newState.status === 'idle') {
+            player.stop();
+            
+        }
     });
 }
 
 async function play(interaction) {
+    // console.log(generateDependencyReport())
     const query = interaction.options.getString("query");
 
     let connection = getVoiceConnection(interaction.guildId);
     let videoId
     let video
+    let videoTitle
     if (query.startsWith("https://www.youtube.com/watch?v=")) {
         videoId = query
+        videoTitle = query
     } else {
-        video = await getFirstYoutubeVideo(query)
+        video = await getFirstYoutubeVideo(query + "official")
         videoId = video.id
+        videoTitle = video.title
     }
-    await downloadAudio(videoId, `./data/audios/${interaction.guildId}.mp3`)
-    const relativePath = `../../data/audios/${interaction.guildId}.mp3`;
-    const absolutePath = join(__dirname, relativePath);
-    const resource = createAudioResource(absolutePath);
-    
+
+    interaction.reply(`Playing ${videoTitle}`);
+
+    // const tempFilePath = temp.path({ suffix: '.mp3', dir: './data/audios' });
+    // var resource
+    // try {
+    //     await downloadAudio(videoId, tempFilePath);
+    //     resource = await createAudioResource(tempFilePath);
+
+    //     // Play the audio resource
+    // } catch (error) {
+    //     console.error('Error:', error.message);
+    // }
+    const stream = await ytdl(videoId, {
+        filter: "audioonly"
+    });
+    const resource = createAudioResource(stream);
+
+
     if (connection === undefined) {
         const userChannelId = interaction.member.voice.channelId;
 
@@ -66,10 +85,9 @@ async function play(interaction) {
             adapterCreator: interaction.guild.voiceAdapterCreator,
         });
         playAudio(connection, resource);
-        interaction.reply(`Playing ${video.title}`);
+        
     } else {
         playAudio(connection, resource);
-        interaction.reply(`Playing ${video.title}`);
     }
 }
 

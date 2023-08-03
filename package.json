@@ -1,0 +1,28 @@
+{
+  "name": "open-muscord",
+  "version": "1.0.0",
+  "description": "Open source discord music bot supporting youtube video",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/longz3r/open-muscord.git"
+  },
+  "author": "Long Zer",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/longz3r/open-muscord/issues"
+  },
+  "homepage": "https://github.com/longz3r/open-muscord#readme",
+  "dependencies": {
+    "@discordjs/opus": "github:discordjs/opus",
+    "@discordjs/voice": "^0.16.0",
+    "discord.js": "^14.12.1",
+    "ffmpeg-static": "^5.1.0",
+    "libsodium-wrappers": "^0.7.11",
+    "youtube-search-api": "^1.2.1",
+    "ytdl-core": "^4.11.5"
+  }
+}

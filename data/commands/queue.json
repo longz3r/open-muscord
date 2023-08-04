@@ -1,0 +1,5 @@
+{
+    "name": "queue",
+    "type": 1,
+    "description": "Get current queue"
+}

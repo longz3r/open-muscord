@@ -1,0 +1,31 @@
+{
+    "name": "loop",
+    "type": 1,
+    "description": "Change current loop mode",
+    "options": [
+        {
+            "name": "mode",
+            "description": "Loop mode you want to choose",
+            "type": 3,
+            "required": false,
+            "choices": [
+                {
+                    "name": "Off",
+                    "value": "0"
+                },
+                {
+                    "name": "Current track",
+                    "value": "1"
+                },
+                {
+                    "name": "Queue",
+                    "value": "2"
+                },
+                {
+                    "name": "Autoplay",
+                    "value": "3"
+                }
+            ]
+        }
+    ]
+}

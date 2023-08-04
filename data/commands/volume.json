@@ -1,0 +1,14 @@
+{
+    "name": "volume",
+    "type": 1,
+    "description": "Change current volume",
+    "options": [
+        {
+            "name": "amount",
+            "description": "amount",
+            "type": 4,
+            "required": true,
+            "min_value": 0
+        }
+    ]
+}

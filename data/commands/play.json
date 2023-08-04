@@ -1,0 +1,19 @@
+{
+    "name": "play",
+    "type": 1,
+    "description": "Plays a song (default to youtube)",
+    "options": [
+        {
+            "name": "query",
+            "description": "Song's name/link you want to play",
+            "type": 3,
+            "required": true
+        },
+        {
+            "name": "service",
+            "description": "Choose the service you want to choose",
+            "type": 3,
+            "required": false
+        }
+    ]
+}

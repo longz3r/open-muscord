@@ -1,6 +1,7 @@
 // const command = require("./../commands/")
 
 const { useMainPlayer } = require("discord-player")
+const { joinVoiceChannel, getVoiceConnection } = require("@discordjs/voice")
 
 const join = require("../commands/join")
 const play = require("../commands/play")
@@ -11,21 +12,25 @@ const resume = require("../commands/resume")
 const loop = require("../commands/loop")
 const shuffle = require("../commands/shuffle")
 const volume = require("../commands/volume")
+const reset = require("../commands/reset")
+const skip = require("../commands/skip")
 
+const verifyCMDconditions = require("../functions/verifyCMDconditions")
 
 async function messageInteractionHandler(interaction) {
-    const discordplayer = await useMainPlayer()
-    console.log(await discordplayer.queues.create(interaction.guildId, {
-        // nodeOptions are the options for guild node (aka your queue in simple word)
-        metadata: interaction, // we can access this metadata object using queue.metadata later on
-        leaveOnEmpty: false,
-        leaveOnEnd: false,
-        leaveOnStop: false
-    }))
-    // console.log(await discordplayer.voiceUtils.getConnection(interaction.guildId))
-    console.log(`${interaction.user.tag} executed ${interaction.commandName}`)
-    command = eval(interaction.commandName)
-    command(interaction)
+    // console.log((await getVoiceConnection(interaction.guildId)).joinConfig.channelId)
+
+    const CMDconditions = await verifyCMDconditions(interaction)
+    // console.log(queue.connection)
+
+    if (CMDconditions.status) {
+        console.log(`${interaction.user.tag} executed ${interaction.commandName}`)
+        command = eval(interaction.commandName)
+        command(interaction)
+    } else {
+        interaction.reply(CMDconditions.message)
+        console.log(`${interaction.user.tag} failed to execute ${interaction.commandName}: ${CMDconditions.message}`)
+    }
 }
 
 module.exports = messageInteractionHandler

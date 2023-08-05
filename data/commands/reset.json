@@ -1,0 +1,5 @@
+{
+    "name": "reset",
+    "type": 1,
+    "description": "Reset current song progress"
+}

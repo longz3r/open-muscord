@@ -8,16 +8,17 @@ const translateMode = {
 }
 
 async function loop(interaction) {
-    const queue = await useQueue(interaction.guild.id);
-    if (queue == null) {
-        interaction.reply("No voice connection was found")
-    } else {
         let currentMode = queue.repeatMode
-        if (currentMode < 3) currentMode += 1
-        else currentMode = 0
+        let userSelectedMode = interaction.options.getString("mode")
+        if (!userSelectedMode) {
+            if (currentMode < 3) currentMode += 1
+            else currentMode = 0
+        } else {
+            currentMode = parseInt(userSelectedMode)
+        }
+
         interaction.reply(`Current loop mode set to **${translateMode[currentMode]}**`)
         queue.setRepeatMode(currentMode)
-    }
 }
 
 module.exports = loop

@@ -7,7 +7,7 @@ async function play(interaction) {
     const query = interaction.options.getString("query");
     // const userVoiceChannelId = interaction.member.voice.channelId
 
-    await joinVoiceChannel(interaction)
+    await joinVoiceChannel(interaction.member.voice.channel.id, interaction)
     const guildQueue = await useQueue(interaction.guildId)
 
     try {

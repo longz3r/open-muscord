@@ -6,10 +6,11 @@ async function skip(interaction) {
         interaction.reply("No connection was found in this server, create one by using **/play** or **/join**")
         return
     }
-    const queue = useQueue(interaction.guild.id);
+    const queue = await useQueue(interaction.guild.id);
+    const currentTrack = queue.currentTrack;
     queue.node.skip()
 
-    interaction.reply("**Skipped**")
+    interaction.reply(`Skipped **${currentTrack}**`)
 }
 
 module.exports = skip

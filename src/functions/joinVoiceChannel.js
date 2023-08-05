@@ -1,7 +1,6 @@
 const { useMainPlayer } = require("discord-player")
-const { joinVoiceChannel } = require("@discordjs/voice")
 
-async function joinVCchannel(interaction) {
+async function joinVCchannel(voiceChannel, interaction) {
     const discordplayer = await useMainPlayer()
     const guildQueue = await discordplayer.queues.create(interaction.guildId, {
         // nodeOptions are the options for guild node (aka your queue in simple word)
@@ -12,8 +11,13 @@ async function joinVCchannel(interaction) {
     })
 
     if (!guildQueue.channel) {
-        await guildQueue.connect(interaction.member.voice.channelId)
+        await guildQueue.connect(voiceChannel)
         console.log("CONNECTED TO VC")
+    } else {
+        // if (guildQueue.channel.id != voiceChannel) {
+        //     await guildQueue.connect(voiceChannel)
+        //     console.log("RECONNECTED TO DIFFERENT CHANNEL")
+        // }
     }
 
     // const connection = await joinVoiceChannel({

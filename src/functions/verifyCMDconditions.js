@@ -8,7 +8,7 @@ async function verifyCMDconditions(interaction) {
 
     const allowedCMDwithoutVC = [
         "join",
-        "stop"
+        // "stop"
     ]
 
     // console.log(await getVoiceConnection(interaction.guildId))

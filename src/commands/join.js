@@ -7,10 +7,11 @@ async function join(interaction) {
     if (userChannelId == null && channel == undefined) {
         interaction.reply("You need to join or specify a channel for me to join")
     } else if (channel != undefined) {
-        joinVoiceChannel(channel, interaction.guildId)
-        interaction.reply(`Joined <#${channel.id}>`)
+        joinVoiceChannel(channel, interaction)
+        interaction.reply(`Joined <#${channel}>`)
     } else if (channel == undefined) {
-        joinVoiceChannel(userChannelId, interaction.guildId)
+        interaction.member.voice.channelId = 
+        joinVoiceChannel(userChannelId, interaction)
         interaction.reply(`Joined <#${userChannelId}>`)
     }
     

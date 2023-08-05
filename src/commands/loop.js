@@ -8,6 +8,7 @@ const translateMode = {
 }
 
 async function loop(interaction) {
+        const queue = useQueue(interaction.guild.id)
         let currentMode = queue.repeatMode
         let userSelectedMode = interaction.options.getString("mode")
         if (!userSelectedMode) {

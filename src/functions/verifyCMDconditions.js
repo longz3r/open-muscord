@@ -7,7 +7,8 @@ async function verifyCMDconditions(interaction) {
     }
 
     const allowedCMDwithoutVC = [
-        "join"
+        "join",
+        "stop"
     ]
 
     // console.log(await getVoiceConnection(interaction.guildId))
@@ -23,6 +24,9 @@ async function verifyCMDconditions(interaction) {
         else if (guildQueue.channel.id != interaction.member.voice.channelId) {
             returnStatements.status = false
             returnStatements.message = `You need to be in the same voice channel with me to use **/${interaction.commandName}**\nJoin <#${guildQueue.channel.id}>`
+        } else if (interaction.member.voice.channel.guildId != interaction.guildId) {
+            returnStatements.status = false
+            returnStatements.message = `You need to be in the same server you ran **/${interaction.commandName}`
         }
     }
 

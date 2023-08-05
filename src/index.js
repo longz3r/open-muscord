@@ -20,10 +20,15 @@ client.on('ready', async () => {
     client.user.setActivity("music for you", { type: 1 });
     console.log("START UP SUCCESSFULLY")
 
+    console.time("Discord-player init")
     const { Player } = require("discord-player")
     const { YoutubeExtractor } = require('@discord-player/extractor');
     const discordplayer = new Player(client);
     await discordplayer.extractors.register(YoutubeExtractor, {});
+
+    const eventsHandler = require("./handler/eventsHandler")
+    await eventsHandler()
+    console.timeEnd("Discord-player init")
 })
 
 const messageInteractionHandler = require("./handler/messageInteractionHandler.js")

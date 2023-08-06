@@ -7,7 +7,8 @@ async function joinVCchannel(voiceChannel, interaction) {
         metadata: {
             channel: interaction.channel
         }, // we can access this metadata object using queue.metadata later on
-        leaveOnEmpty: false,
+        leaveOnEmpty: true,
+        leaveOnEmptyCooldown: 900000, 
         leaveOnEnd: false,
         leaveOnStop: true,
         pauseOnEmpty: true,
@@ -17,19 +18,11 @@ async function joinVCchannel(voiceChannel, interaction) {
         await guildQueue.connect(voiceChannel)
         console.log("CONNECTED TO VC")
     } else {
-        // if (guildQueue.channel.id != voiceChannel) {
-        //     await guildQueue.connect(voiceChannel)
-        //     console.log("RECONNECTED TO DIFFERENT CHANNEL")
-        // }
+        if (guildQueue.channel.id != voiceChannel) {
+            await guildQueue.connect(voiceChannel)
+            console.log("RECONNECTED TO DIFFERENT CHANNEL")
+        }
     }
-
-    // const connection = await joinVoiceChannel({
-    //     channelId: channelId,
-    //     guildId: guildId,
-    //     adapterCreator: voiceAdapterCreator,
-    // });
-
-    // guildQueue.createDispatcher(connection);
 }
 
 module.exports = joinVCchannel

@@ -26,7 +26,7 @@ client.on('ready', async () => {
     const discordplayer = new Player(client);
     await discordplayer.extractors.register(YoutubeExtractor, {});
 
-    const eventsHandler = require("./handler/eventsHandler")
+    const eventsHandler = require("./events/eventsHandler")
     await eventsHandler()
     console.timeEnd("Discord-player init")
 })

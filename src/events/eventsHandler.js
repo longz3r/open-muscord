@@ -19,6 +19,7 @@ async function eventsHandler() {
     // });
 
     player.events.on("emptyChannel", (queue) => {
+        console.log("empty channel")
         queue.metadata.channel.send({
             embeds: [{
                 color: 0x00ffff,
@@ -29,6 +30,10 @@ async function eventsHandler() {
                 title: 'Paused track. I will leave in 15 minutes because I was left alone',
             }]
         });
+    })
+
+    player.events.on("channelPopulate", (queue) => {
+        console.log("channel populate")
     })
 }
 

@@ -1,7 +1,6 @@
 // const command = require("./../commands/")
 
-const { useMainPlayer } = require("discord-player")
-const { joinVoiceChannel, getVoiceConnection } = require("@discordjs/voice")
+const logger = require("./logHandler")
 
 const join = require("../commands/join")
 const play = require("../commands/play")
@@ -24,12 +23,12 @@ async function messageInteractionHandler(interaction) {
     // console.log(queue.connection)
 
     if (CMDconditions.status) {
-        console.log(`${interaction.user.tag} executed ${interaction.commandName}`)
+        logger.info(`${interaction.user.tag} executed ${interaction.commandName}`)
         command = eval(interaction.commandName)
         command(interaction)
     } else {
         interaction.reply(CMDconditions.message)
-        console.log(`${interaction.user.tag} failed to execute ${interaction.commandName}: ${CMDconditions.message}`)
+        logger.warn(`${interaction.user.tag} failed to execute ${interaction.commandName}: ${CMDconditions.message}`)
     }
 }
 

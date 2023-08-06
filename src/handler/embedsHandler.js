@@ -5,7 +5,7 @@ function playerEmbed(track) {
             name: 'Muscord',
             icon_url: 'https://www.longcraft.xyz/muscord.png',
         },
-        title: 'Started playing',
+        title: 'Now playing',
         thumbnail: {
             url: track.thumbnail
         },

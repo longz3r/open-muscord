@@ -8,7 +8,7 @@ async function joinVCchannel(voiceChannel, interaction) {
             channel: interaction.channel
         }, // we can access this metadata object using queue.metadata later on
         leaveOnEmpty: true,
-        leaveOnEmptyCooldown: 900000, 
+        leaveOnEmptyCooldown: 5000, 
         leaveOnEnd: false,
         leaveOnStop: true,
         pauseOnEmpty: true,

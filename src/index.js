@@ -10,6 +10,10 @@ const client = new Client({ partials: [Partials.Channel], intents: [
 ] });
 
 const config = require("../config.json")
+
+const { Player } = require("discord-player")
+const { YoutubeExtractor } = require('@discord-player/extractor');
+
 console.time("Discord login")
 
 client.login(config.token);
@@ -21,12 +25,19 @@ client.on('ready', async () => {
     console.log("START UP SUCCESSFULLY")
 
     console.time("Discord-player init")
-    const { Player } = require("discord-player")
-    const { YoutubeExtractor } = require('@discord-player/extractor');
-    const discordplayer = new Player(client);
+    
+    const discordplayer = new Player(client, {
+        ytdlOptions: {
+            requestOptions: {
+                Headers: {
+                    cookies: config.youtube_cookies
+                }
+            }
+        }
+    });
     await discordplayer.extractors.register(YoutubeExtractor, {});
 
-    const eventsHandler = require("./events/eventsHandler")
+    const eventsHandler = require("./playerEvents/eventsHandler")
     await eventsHandler()
     console.timeEnd("Discord-player init")
 })

@@ -9,7 +9,8 @@ async function joinVCchannel(voiceChannel, interaction) {
         }, // we can access this metadata object using queue.metadata later on
         leaveOnEmpty: false,
         leaveOnEnd: false,
-        leaveOnStop: true
+        leaveOnStop: true,
+        pauseOnEmpty: true,
     })
 
     if (!guildQueue.channel) {

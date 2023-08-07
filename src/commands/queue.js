@@ -1,5 +1,8 @@
 const { useQueue } = require("discord-player");
 const verifyQueue = require("../functions/verifyQueue")
+const splitArray = require("../utilities/splitArray")
+
+const displayQueue = require("../functions/displayQueue")
 
 async function queue(interaction) {
     if (!await verifyQueue(interaction.guildId)) {
@@ -7,24 +10,19 @@ async function queue(interaction) {
         return
     }
     const queue = useQueue(interaction.guildId);
-    if (queue != null) {
+    if (queue.tracks.size != 0) {
         const tracks = queue.tracks.toArray();
-        const currentTrack = queue.currentTrack;
-        let queueLength = tracks.length
+        const pages = splitArray(tracks, 20)
 
-        replyMessage = `Playing **${currentTrack}**\n**${tracks.length}** songs queued`
-        if (tracks.length > 20) {
-            queueLength = 20
-        }
-        for (i = 0; i < queueLength; i++) {
-            replyMessage += `\n**${i + 1}.** ${tracks[i]}`
-        }
+        const queueData = displayQueue(pages)
 
-        interaction.reply(replyMessage)
+        interaction.reply({
+            embeds: [queueData.embed],
+            components: queueData.rows
+    })
     } else {
         interaction.reply("Nothing in queue")
     }
-    
 }
 
 module.exports = queue

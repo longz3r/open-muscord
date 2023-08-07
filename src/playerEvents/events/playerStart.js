@@ -3,17 +3,17 @@ const { ActionRowBuilder, ButtonBuilder, ButtonStyle } = require("discord.js")
 
 const previous = new ButtonBuilder()
 	.setCustomId('previous')
-	.setStyle(ButtonStyle.Primary)
+	.setStyle(ButtonStyle.Secondary)
     .setEmoji("⏮️")
 
 const pause = new ButtonBuilder()
 	.setCustomId('pause')
-	.setStyle(ButtonStyle.Primary)
+	.setStyle(ButtonStyle.Secondary)
     .setEmoji("⏯️")
 
 const skip = new ButtonBuilder()
 	.setCustomId('skip')
-	.setStyle(ButtonStyle.Primary)
+	.setStyle(ButtonStyle.Secondary)
     .setEmoji("⏭️")
 
 const volumeUp = new ButtonBuilder()
@@ -23,17 +23,17 @@ const volumeUp = new ButtonBuilder()
 
 const shuffle = new ButtonBuilder()
 	.setCustomId('shuffle')
-	.setStyle(ButtonStyle.Primary)
+	.setStyle(ButtonStyle.Secondary)
     .setEmoji("🔀")
 
 const loop = new ButtonBuilder()
 	.setCustomId('loop')
-	.setStyle(ButtonStyle.Primary)
+	.setStyle(ButtonStyle.Secondary)
     .setEmoji("🔁")
 
 const queue = new ButtonBuilder()
 	.setCustomId('queue')
-	.setStyle(ButtonStyle.Primary)
+	.setStyle(ButtonStyle.Secondary)
     .setEmoji("🗒️")
 
 const volumeDown = new ButtonBuilder()
@@ -48,20 +48,34 @@ const upperRow = new ActionRowBuilder()
 const bottomRow = new ActionRowBuilder()
     .addComponents(shuffle, loop, queue, volumeDown);
 
+const { InteractionCollector } = require("discord.js")
+const client = require("../../index")
+const buttonCollector = require("../../handler/buttonCollector")
+
 async function playerStart(queue, track) {
-    const oldMessage = await queue.metadata.channel.send({
-        embeds: [embeds.playerEmbed(track)],
-        components: [upperRow, bottomRow],
-    })
-    let queueMetadata = queue.metadata
+    let nowPlayingMessage
     try {
-        queueMetadata.oldMessage.delete()
+        nowPlayingMessage = await queue.metadata.channel.send({
+            embeds: [embeds.playerEmbed(track, queue)],
+            components: [upperRow, bottomRow],
+        })
     } catch (e) {
         console.error(e)
     }
-    Object.assign(queueMetadata, {oldMessage: oldMessage})
-    queue.setMetadata(queueMetadata)
-    
+
+    let queueMetadata = queue.metadata
+    Object.assign(queueMetadata, {nowPlayingMessage: nowPlayingMessage})
+
+    const collector = new InteractionCollector(client, {
+        channel: queueMetadata.channel,
+        componentType: 2,
+        message: nowPlayingMessage,
+    })
+
+    Object.assign(queueMetadata, {buttonCollector: collector}) 
+    await queue.setMetadata(queueMetadata)
+
+    buttonCollector(queue)
 } 
 
 module.exports = playerStart

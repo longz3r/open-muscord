@@ -1,12 +1,7 @@
 const { useQueue } = require("discord-player");
 const verifyQueue = require("../functions/verifyQueue")
-
-const translateMode = {
-    0: "off",
-    1: "current song",
-    2: "queue",
-    3: "autoplay (suggesting song and add it to queue)"
-}
+const translateLoopMode = require("../functions/translateLoopMode")
+const updateMessage = require("../functions/updateMessage")
 
 async function loop(interaction) {
     if (!await verifyQueue(interaction.guildId)) {
@@ -23,7 +18,12 @@ async function loop(interaction) {
         currentMode = parseInt(userSelectedMode)
     }
 
-    interaction.reply(`Current loop mode set to **${translateMode[currentMode]}**`)
+    let currentMessageEmbed = queue.metadata.nowPlayingMessage.embeds[0].data
+    currentMessageEmbed.fields[3].value = translateLoopMode[currentMode]
+    currentMessageEmbed.fields[2].value = `<@${interaction.user.id}> set loop mode to ${translateLoopMode[currentMode]}`
+    updateMessage(queue, currentMessageEmbed)
+
+    interaction.reply(`Current loop mode set to **${translateLoopMode[currentMode]}**`)
     queue.setRepeatMode(currentMode)
 }
 

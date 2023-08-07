@@ -9,10 +9,20 @@ async function resume(interaction) {
     let replyMessage = ""
     const queue = useQueue(interaction.guildId);
     if (queue.node.isPaused()) {
+        try {
+            let currentMessageEmbed = queue.metadata.nowPlayingMessage.embeds[0]
+            currentMessageEmbed.data.title = "Now playing"
+            currentMessageEmbed.fields[2].value = `<@${interaction.user.id}> resumed the track`
+            queue.metadata.nowPlayingMessage.edit({
+                embeds: [currentMessageEmbed]
+            })
+        } catch (error) {
+            console.error(error)
+        } 
         queue.node.setPaused(false)
         replyMessage = "Resuming"
     } else {
-        replyMessage = "Playback wasn't pause"
+        replyMessage = "Track wasn't pause"
     }
     interaction.reply(replyMessage)
 }

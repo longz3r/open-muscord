@@ -1,4 +1,9 @@
-function playerEmbed(track) {
+const translateLoopMode = require("../functions/translateLoopMode")
+
+function playerEmbed(track, queue) {
+    let nextTrack
+    if (queue.tracks.size == 0) nextTrack = "Nothing up next, add some"
+    else nextTrack = `\`\`${queue.tracks.at(0).raw.durationFormatted}\`\` ${queue.tracks.at(0).raw.title}`
     return {
         color: 0x00ffff,
         author: {
@@ -9,33 +14,37 @@ function playerEmbed(track) {
         thumbnail: {
             url: track.thumbnail
         },
-        description: `\`\`${track.duration}\`\` **${track.title}**`,
-        // fields: [
-        //     {
-        //         name: 'Regular field title',
-        //         value: 'Some value here',
-        //     },
-        //     {
-        //         name: '\u200b',
-        //         value: '\u200b',
-        //         inline: false,
-        //     },
-        //     {
-        //         name: 'Inline field title',
-        //         value: 'Some value here',
-        //         inline: true,
-        //     },
-        //     {
-        //         name: 'Inline field title',
-        //         value: 'Some value here',
-        //         inline: true,
-        //     },
-        //     {
-        //         name: 'Inline field title',
-        //         value: 'Some value here',
-        //         inline: true,
-        //     },
-        // ]
+        description: `**${track.title}**`,
+        fields: [
+            {
+                name: queue.node.createProgressBar(),
+                value: `\u200b`
+            },
+            {
+                name: "Next track",
+                value: nextTrack
+            },
+            {
+                name: '\u200b',
+                value: '\u200b',
+                inline: false,
+            },
+            {
+                name: 'Loop mode',
+                value: translateLoopMode[queue.repeatMode],
+                inline: true,
+            },
+            {
+                name: 'Queue length',
+                value: queue.tracks.size,
+                inline: true,
+            },
+            {
+                name: 'Volume',
+                value: queue.node.volume + "%",
+                inline: true,
+            },
+        ]
     };
 }
 

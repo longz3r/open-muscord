@@ -25,7 +25,11 @@
     "discord.js": "^14.12.1",
     "libsodium-wrappers": "^0.7.11",
     "opusscript": "^0.0.8",
+    "utf-8-validate": "^6.0.3",
     "winston": "^3.10.0",
     "ytdl-core": "^4.11.5"
+  },
+  "optionalDependencies": {
+    "bufferutil": "^4.0.7"
   }
 }

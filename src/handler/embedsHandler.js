@@ -35,7 +35,7 @@ function playerEmbed(track, queue) {
                 inline: true,
             },
             {
-                name: 'Queue length',
+                name: 'Tracks in queue',
                 value: queue.tracks.size,
                 inline: true,
             },

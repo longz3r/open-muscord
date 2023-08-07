@@ -1,5 +1,6 @@
 const { useQueue } = require("discord-player");
 const verifyQueue = require("../functions/verifyQueue")
+const updateMessage = require("../functions/updateMessage")
 
 async function shuffle(interaction) {
     if (!await verifyQueue(interaction.guildId)) {
@@ -12,6 +13,10 @@ async function shuffle(interaction) {
             ephemeral: true
         })
         return
+    }
+    if (queue.tracks.size > 1) {
+        let currentMessageEmbed = queue.metadata.nowPlayingMessage.embeds[0].data
+        currentMessageEmbed.fields[1].value = `\`\`${queue.tracks.at(0).raw.durationFormatted}\`\` ${queue.tracks.at(0).raw.title}`
     }
     const queue = useQueue(interaction.guildId);
     await queue.tracks.shuffle();

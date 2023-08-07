@@ -14,8 +14,7 @@ async function shuffle(interaction) {
 
     queue.tracks.shuffle();
     interaction.reply({
-        content: "Shuffled queue in a unique way",
-        ephemeral: true
+        content: "Shuffled queue in a unique way"
     })
 }
 

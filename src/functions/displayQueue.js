@@ -19,6 +19,10 @@ function displayQueue(pages, currentPage) {
             .setLabel("Page " + i)
             .setValue(i.toString())
         )
+
+        if (i == currentPage) {
+            pagesOptions[i - 1].setDefault(true)
+        }
     }
 
     for (let i = 0; i < pages[currentPage - 1].length; i++) {

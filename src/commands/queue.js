@@ -3,6 +3,7 @@ const verifyQueue = require("../functions/verifyQueue")
 const splitArray = require("../utilities/splitArray")
 
 const displayQueue = require("../functions/displayQueue")
+const localDatabase = require("../handler/localDatabase")
 
 async function queue(interaction) {
     if (!await verifyQueue(interaction.guildId)) {
@@ -16,10 +17,13 @@ async function queue(interaction) {
 
         const queueData = displayQueue(pages)
 
-        interaction.reply({
+        const interactionMessage = await interaction.reply({
             embeds: [queueData.embed],
             components: queueData.rows
-    })
+        })
+        
+        console.log(interactionMessage.id)
+        localDatabase.interaction.set(interactionMessage.id, interaction.user.id)
     } else {
         interaction.reply("Nothing in queue")
     }

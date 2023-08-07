@@ -14,13 +14,14 @@ async function shuffle(interaction) {
     if (queue.tracks.size > 1) {
         let currentMessageEmbed = queue.metadata.nowPlayingMessage.embeds[0].data
         currentMessageEmbed.fields[1].value = `\`\`${queue.tracks.at(0).raw.durationFormatted}\`\` ${queue.tracks.at(0).raw.title}`
-
+        currentMessageEmbed.fields[2].value = `<@${interaction.user.id}> shuffled the queue`
         updateMessage(queue, currentMessageEmbed)
     }
 
     queue.tracks.shuffle();
     interaction.reply({
-        content: "Shuffled queue in a unique way"
+        content: "Shuffled queue in a unique way",
+        epehmeral: true
     })
 }
 

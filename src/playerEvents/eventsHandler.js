@@ -16,6 +16,10 @@ async function eventsHandler() {
     });
 
     player.events.on("voiceStateUpdate", (queue, oldState, newState) => voiceStateUpdate(queue, diff(oldState, newState)))
+
+    player.events.on("emptyQueue", (queue) => {
+        queue.metadata.channel.send("**Queue completed!**")
+    })
 }
 
 module.exports = eventsHandler

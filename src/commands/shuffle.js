@@ -7,6 +7,9 @@ async function shuffle(interaction) {
         interaction.reply("No connection was found in this server, create one by using **/play** or **/join**")
         return
     }
+
+    const queue = useQueue(interaction.guildId);
+
     if (queue.tracks.size == 0) {
         interaction.reply({
             content: "Nothing in queue to shuffle",
@@ -17,8 +20,10 @@ async function shuffle(interaction) {
     if (queue.tracks.size > 1) {
         let currentMessageEmbed = queue.metadata.nowPlayingMessage.embeds[0].data
         currentMessageEmbed.fields[1].value = `\`\`${queue.tracks.at(0).raw.durationFormatted}\`\` ${queue.tracks.at(0).raw.title}`
+
+        updateMessage(queue, currentMessageEmbed)
     }
-    const queue = useQueue(interaction.guildId);
+    
     await queue.tracks.shuffle();
     interaction.reply("Shuffled queue in a unique way")
 }

@@ -11,6 +11,12 @@ async function shuffle(interaction) {
         })
         return
     }
+    if (queue.tracks.size > 1) {
+        let currentMessageEmbed = queue.metadata.nowPlayingMessage.embeds[0].data
+        currentMessageEmbed.fields[1].value = `\`\`${queue.tracks.at(0).raw.durationFormatted}\`\` ${queue.tracks.at(0).raw.title}`
+
+        updateMessage(queue, currentMessageEmbed)
+    }
 
     queue.tracks.shuffle();
     interaction.reply({

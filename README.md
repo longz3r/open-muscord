@@ -30,13 +30,19 @@ This repository contains a Discord music bot built using discord.js v14 and disc
    npm install
    ```
 
-4. Register the necessary Slash Commands with the Discord API by making a POST request. Refer to the [Discord API documentation](https://discord.com/developers/docs/interactions/slash-commands) for details on registering slash commands.
+4. Register the necessary Slash Commands with the Discord API by making a POST request. Replace `<client id>` with your Discord bot's client ID and `<discord bot token>` with your bot's token. You can make a POST request to the following URL with the specified headers:
+
+   ```http
+   POST https://discord.com/api/v10/applications/<client id>/commands
+   Headers:
+   - Authorization: Bot <discord bot token>
+   ```
 
 5. Install FFmpeg on your computer or through npm using:
    
-   \\\\
+   ```shell
    npm install ffmpeg-static
-   \\\\
+   ```
 
 6. Create a `config.json` file based on the provided `config_example.json`. Fill in the required details such as your bot token, API keys, and other configuration options.
 

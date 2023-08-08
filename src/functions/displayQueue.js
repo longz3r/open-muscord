@@ -13,7 +13,7 @@ function displayQueue(pages, currentPage) {
 
     const trackSelectMenu = new StringSelectMenuBuilder()
 		.setCustomId('trackSelect')
-		.setPlaceholder('Choose a track track to jump')
+		.setPlaceholder('Select a track to jump')
 
     for (let i = 1; i <= pages.length; i++) {
         pagesOptions.push(new StringSelectMenuOptionBuilder()

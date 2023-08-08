@@ -15,13 +15,13 @@ This repository contains a Discord music bot built using discord.js v14 and disc
 1. Clone the repository using the following command:
    
    ```shell
-   git clone https://github.com/your-username/your-repo.git
+   git clone https://github.com/longz3r/open-muscord.git
    ```
 
 2. Navigate to the repository's root folder:
    
    ```shell
-   cd your-repo
+   cd open-muscord
    ```
 
 3. Install the required dependencies by running:
@@ -70,6 +70,6 @@ Contributions to this project are welcome! If you'd like to contribute, follow t
 ## To-Do
 
 - [ ] Implement additional music sources (e.g., Spotify, SoundCloud).
-- [ ] Improve error handling and user feedback.
-- [ ] Add a queue system for managing multiple music requests.
+- [ ] Auto making request to discord API on bot startup.
+- [ ] Find a bug to fix it.
 - [ ] Enhance documentation with usage examples and FAQs.

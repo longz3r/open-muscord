@@ -4,12 +4,13 @@ const { ActionRowBuilder, ButtonBuilder, ButtonStyle } = require("discord.js")
 const previous = new ButtonBuilder()
 	.setCustomId('previous')
 	.setStyle(ButtonStyle.Secondary)
+    .setDisabled(true)
     .setEmoji("⏮️")
 
 const pause = new ButtonBuilder()
 	.setCustomId('pause')
 	.setStyle(ButtonStyle.Secondary)
-    .setEmoji("⏯️")
+    .setEmoji("⏸️")
 
 const skip = new ButtonBuilder()
 	.setCustomId('skip')
@@ -33,6 +34,7 @@ const loop = new ButtonBuilder()
 
 const queue = new ButtonBuilder()
 	.setCustomId('queue')
+    .setDisabled(true)
 	.setStyle(ButtonStyle.Secondary)
     .setEmoji("🗒️")
 

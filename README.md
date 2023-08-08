@@ -2,6 +2,8 @@
 
 This repository contains a Discord music bot built using discord.js v14 and discord-player, designed to bring back music functionality to your Discord server. The bot supports YouTube playback and offers a straightforward setup process.
 
+`src` folder containing 45 files/41.848 bytes/1151 lines of code
+
 ## Table of Contents
 
 - [Installation](#installation)

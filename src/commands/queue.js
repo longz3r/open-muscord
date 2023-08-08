@@ -22,8 +22,26 @@ async function queue(interaction) {
             components: queueData.rows
         })
         
-        console.log(interactionMessage.id)
-        localDatabase.interaction.set(interactionMessage.id, interaction.user.id)
+        localDatabase.interaction.set(interactionMessage.id, {
+            interactionMessage: interactionMessage,
+            owner: interaction.user.id,
+            completed: false
+        })
+
+        setTimeout(() => {
+            const interactionInfo = localDatabase.interaction.get(interactionMessage.id)
+            if (!interactionInfo.completed) {
+                try {
+                    interactionInfo.interactionMessage.edit({
+                        content: "This command is expired",
+                        embeds: [],
+                        components: []
+                    })
+                } catch (error) {
+
+                } 
+            }
+        }, queue.currentTrack.durationMS - queue.node.estimatedPlaybackTime)
     } else {
         interaction.reply("Nothing in queue")
     }

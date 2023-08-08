@@ -4,7 +4,7 @@ const { diff } = require("deep-diff")
 const voiceStateUpdate = require("./events/voiceStateUpdate")
 const playerStart = require("./events/playerStart")
 const playerFinish = require("./events/playerFinish")
-const volumeChange = require("./events/volumeChange")
+// const volumeChange = require("./events/volumeChange")
 
 async function eventsHandler() {
     const player = useMainPlayer()

@@ -1,9 +1,15 @@
 const translateLoopMode = require("../functions/translateLoopMode")
 
 function playerEmbed(track, queue) {
-    let nextTrack
+    let nextTrack, eventHistory
     if (queue.tracks.size == 0) nextTrack = "Nothing up next, add some"
     else nextTrack = `\`\`${queue.tracks.at(0).raw.durationFormatted}\`\` ${queue.tracks.at(0).raw.title}`
+
+    const currentMessage = queue.metadata.nowPlayingMessage
+    
+    if (!currentMessage) eventHistory = '\u200b'
+    else eventHistory = queue.metadata.nowPlayingMessage.embeds[0].data.fields[2].value
+
     return {
         color: 0x00ffff,
         author: {
@@ -26,7 +32,7 @@ function playerEmbed(track, queue) {
             },
             {
                 name: '\u200b',
-                value: '\u200b',
+                value: eventHistory,
                 inline: false,
             },
             {

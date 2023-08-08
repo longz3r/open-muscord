@@ -5,13 +5,14 @@ function displayQueue(pages, currentPage) {
     let pagesOptions = []
     let trackOptions = []
     let tracks = []
+    const baseNumber = (currentPage - 1) * 20
 
     const pageSelectMenu = new StringSelectMenuBuilder()
-		.setCustomId('page')
+		.setCustomId('pageSelect')
 		.setPlaceholder('Jump to a page')
 
     const trackSelectMenu = new StringSelectMenuBuilder()
-		.setCustomId('track')
+		.setCustomId('trackSelect')
 		.setPlaceholder('Choose a track track to jump')
 
     for (let i = 1; i <= pages.length; i++) {
@@ -27,12 +28,12 @@ function displayQueue(pages, currentPage) {
 
     for (let i = 0; i < pages[currentPage - 1].length; i++) {
         tracks.push({
-            value: `**${i + 1}. **` + pages[currentPage - 1][i].title,
+            value: `**${i + baseNumber + 1}. **` + pages[currentPage - 1][i].title,
             name: ""
         })
         trackOptions.push(new StringSelectMenuOptionBuilder()
-            .setLabel(`${i + 1}. ` + pages[currentPage - 1][i].title)
-            .setValue(i.toString())
+            .setLabel((`${i + baseNumber + 1}. ` + pages[currentPage - 1][i].title).slice(0, 99))
+            .setValue((i + baseNumber).toString())
         )
     }
 

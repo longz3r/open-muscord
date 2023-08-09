@@ -4,6 +4,10 @@ This repository contains a Discord music bot built using discord.js v14 and disc
 
 `src` folder containing 45 files/41.848 bytes/1151 lines of code
 
+## License
+
+open-muscord is licensed under the MIT License
+
 ## Table of Contents
 
 - [Installation](#installation)
@@ -38,6 +42,8 @@ This repository contains a Discord music bot built using discord.js v14 and disc
    POST https://discord.com/api/v10/applications/<client id>/commands
    Headers:
    - Authorization: Bot <discord bot token>
+   Body:
+   - every .json file in data/commands
    ```
 
 5. Install FFmpeg on your computer or through npm using:

@@ -13,7 +13,7 @@ async function queue(interaction) {
     const queue = useQueue(interaction.guildId);
     if (queue.tracks.size != 0) {
         const tracks = queue.tracks.toArray();
-        const pages = splitArray(tracks, 20)
+        const pages = splitArray(tracks, 10)
 
         const queueData = displayQueue(pages)
 

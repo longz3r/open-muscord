@@ -8,7 +8,7 @@ async function pageSelect(interaction) {
     const interactionInfo = localDatabase.interaction.get(interaction.message.interaction.id)
 
     const tracks = queue.tracks.toArray();
-    const pages = splitArray(tracks, 20)
+    const pages = splitArray(tracks, 10)
     const queueData = displayQueue(pages, parseInt(interaction.values[0]))
     interaction.deferUpdate()
     try {

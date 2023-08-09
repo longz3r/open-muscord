@@ -56,6 +56,11 @@ open-muscord is licensed under the MIT License
 
 7. Invite the bot with `https://discord.com/api/oauth2/authorize?client_id=<your client id>&permissions=35186556332368&scope=bot` and start using it by slash command
 
+8. Start it with
+   ```shell
+   npm start
+   ```
+
 ## Configuration
 
 Before running the bot, you need to configure the `config.json` file. Open the file and provide the necessary values for each configuration option.

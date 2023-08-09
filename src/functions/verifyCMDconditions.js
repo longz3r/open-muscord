@@ -43,19 +43,11 @@ async function verifyCMDconditions(interaction) {
             }
         }
     } else if(interaction.isStringSelectMenu()) {
-        let messageId
-        if (!interaction.message.interaction) {
-            messageId = interaction.message.id
-        } else {
-            console.log("NIGGA")
-            messageId = interaction.message.reference.messageId
-        }
-
-        const interactionInfo = localDatabase.interaction.get(messageId)
-        if (!interactionInfo) {
+        const intreactionInfo = localDatabase.interaction.get(interaction.message.interaction.id)
+        if (!intreactionInfo) {
             returnStatements.status = false
             returnStatements.message = "Unknown interaction"
-        } else if (interaction.user.id != interactionInfo.owner) {
+        } else if (interaction.user.id != intreactionInfo.owner) {
             returnStatements.status = false
             returnStatements.message = "This is not your interaction"
         } else if (allowedStringSelectMenuWithoutVC.includes(interaction.customId)) {

@@ -5,7 +5,7 @@ function displayQueue(pages, currentPage) {
     let pagesOptions = []
     let trackOptions = []
     let tracks = []
-    const baseNumber = (currentPage - 1) * 20
+    const baseNumber = (currentPage - 1) * 10
 
     const pageSelectMenu = new StringSelectMenuBuilder()
 		.setCustomId('pageSelect')

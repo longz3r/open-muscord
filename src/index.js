@@ -21,7 +21,7 @@ client.login(config.token);
 client.on('ready', async () => {
     console.log(`Logged in as ${client.user.tag}`)
     console.timeEnd("Discord login")
-    client.user.setActivity("CAI DIT ME MAY", { type: 1 });
+    client.user.setActivity("music for people", { type: 1 });
     console.log("START UP SUCCESSFULLY")
 
     console.time("Discord-player init")

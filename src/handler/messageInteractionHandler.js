@@ -13,6 +13,7 @@ const shuffle = require("../commands/shuffle")
 const volume = require("../commands/volume")
 const reset = require("../commands/reset")
 const skip = require("../commands/skip")
+const clear = require("../commands/clear")
 
 const verifyCMDconditions = require("../functions/verifyCMDconditions")
 

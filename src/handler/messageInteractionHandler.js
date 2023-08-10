@@ -24,12 +24,12 @@ async function messageInteractionHandler(interaction) {
     // console.log(queue.connection)
 
     if (CMDconditions.status) {
-        logger.info(`${interaction.user.tag} executed ${interaction.commandName}`)
+        logger.info(`${interaction.user.displayName} executed ${interaction.commandName} at ${interaction.guild.name}`)
         command = eval(interaction.commandName)
         command(interaction)
     } else {
         interaction.reply(CMDconditions.message)
-        logger.warn(`${interaction.user.tag} failed to execute ${interaction.commandName}: ${CMDconditions.message}`)
+        logger.warn(`${interaction.user.displayName} failed to execute ${interaction.commandName}: ${CMDconditions.message}`)
     }
 }
 

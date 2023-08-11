@@ -9,7 +9,11 @@ async function updateMessage(queue, newEmbed, newComponents) {
             components: newComponents
         })
     } catch (error) {
-
+        try {
+            metadata.channel.send("Something went wrong! If the track froze please do **/stop**")
+        } catch (error) {
+            
+        }
     }
 }
 

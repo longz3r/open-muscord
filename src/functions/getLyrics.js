@@ -1,28 +1,27 @@
-const { lyricsExtractor } = require("@discord-player/extractor")
+const lyricsFinder = require("lyrics-finder")
 
-const config = require("../../config.json")
-const lyricsFinder = lyricsExtractor(config.genius_api_key);
-
-async function getLyrics(searchQuery) {
-    const lyrics = await lyricsFinder.search("faded");
+async function getLyrics(artist, title) {
+    console.log(artist)
+    console.log(title)
+    const lyrics = await lyricsFinder("the fat rat", "fly away")
     console.log(lyrics)
     if (!lyrics) return false
 
-    const trimmedLyrics = lyrics.lyrics.substring(0, 1997);
+    // const trimmedLyrics = lyrics.lyrics.substring(0, 1997);
 
-    const embed = new EmbedBuilder()
-        .setTitle(lyrics.title)
-        .setURL(lyrics.url)
-        .setThumbnail(lyrics.thumbnail)
-        .setAuthor({
-            name: lyrics.artist.name,
-            iconURL: lyrics.artist.image,
-            url: lyrics.artist.url
-        })
-        .setDescription(trimmedLyrics.length === 1997 ? `${trimmedLyrics}...` : trimmedLyrics)
-        .setColor('Yellow');
+    // const embed = new EmbedBuilder()
+    //     .setTitle(lyrics.title)
+    //     .setURL(lyrics.url)
+    //     .setThumbnail(lyrics.thumbnail)
+    //     .setAuthor({
+    //         name: lyrics.artist.name,
+    //         iconURL: lyrics.artist.image,
+    //         url: lyrics.artist.url
+    //     })
+    //     .setDescription(trimmedLyrics.length === 1997 ? `${trimmedLyrics}...` : trimmedLyrics)
+    //     .setColor('Yellow');
 
-    return embed
+    // return embed
 }
 
 module.exports = getLyrics

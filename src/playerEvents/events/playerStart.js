@@ -34,6 +34,7 @@ const loop = new ButtonBuilder()
 
 const queue = new ButtonBuilder()
 	.setCustomId('lyrics')
+    .setDisabled(true)
 	.setStyle(ButtonStyle.Secondary)
     .setEmoji("🎵")
 

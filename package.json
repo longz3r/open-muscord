@@ -25,6 +25,7 @@
     "discord-player": "^6.6.2",
     "discord.js": "^14.12.1",
     "libsodium-wrappers": "^0.7.11",
+    "lyrics-finder": "^21.7.0",
     "opusscript": "^0.0.8",
     "utf-8-validate": "^6.0.3",
     "winston": "^3.10.0",

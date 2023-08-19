@@ -12,7 +12,7 @@ const client = new Client({ partials: [Partials.Channel], intents: [
 const config = require("../config.json")
 
 const { Player } = require("discord-player")
-const { YoutubeExtractor } = require('@discord-player/extractor');
+const { YoutubeExtractor, SpotifyExtractor, SoundCloudExtractor, BridgeProvider, BridgeSource } = require('@discord-player/extractor');
 
 console.time("Discord login")
 
@@ -35,7 +35,14 @@ client.on('ready', async () => {
             }
         }
     });
+
+    const bridgeProvider = new BridgeProvider(BridgeSource.YouTube)
+
     await discordplayer.extractors.register(YoutubeExtractor, {});
+    await discordplayer.extractors.register(SoundCloudExtractor, {})
+    await discordplayer.extractors.register(SpotifyExtractor, {
+        bridgeProvider
+    })
 
     const eventsHandler = require("./playerEvents/eventsHandler")
     await eventsHandler()

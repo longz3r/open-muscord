@@ -4,7 +4,7 @@ const skip = require("../buttonInteraction/skip")
 const volumeUp = require("../buttonInteraction/volumeUp")
 const shuffle = require("../buttonInteraction/shuffle")
 const loop = require("../buttonInteraction/loop")
-const queue = require("../buttonInteraction/queue")
+const lyrics = require("../buttonInteraction/lyrics")
 const volumeDown = require("../buttonInteraction/volumeDown")
 
 const verifyCMDconditions = require("../functions/verifyCMDconditions")

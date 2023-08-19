@@ -3,7 +3,10 @@ const translateLoopMode = require("../functions/translateLoopMode")
 function playerEmbed(track, queue) {
     let nextTrack, eventHistory
     if (queue.tracks.size == 0) nextTrack = "Nothing up next, add some"
-    else nextTrack = `\`\`${queue.tracks.at(0).raw.durationFormatted}\`\` ${queue.tracks.at(0).raw.title}`
+    else {
+        if (!queue.tracks.at(0).raw.durationFormatted) queue.tracks.at(0).raw.durationFormatted = "Unknown duration"
+        nextTrack = `\`\`${queue.tracks.at(0).raw.durationFormatted}\`\` ${queue.tracks.at(0).raw.title}`
+    }
 
     const currentMessage = queue.metadata.nowPlayingMessage
     

@@ -13,7 +13,7 @@ async function volume(interaction) {
 
     let currentMessageEmbed = queue.metadata.nowPlayingMessage.embeds[0].data
     currentMessageEmbed.fields[5].value = queue.node.volume + "%"
-    currentMessageEmbed.fields[2].value = `<@${interaction.user.id}> set volume to ${queue.node.volume}`
+    currentMessageEmbed.fields[2].value = `<@${interaction.user.id}> set volume to **${queue.node.volume}%**`
     updateMessage(queue, currentMessageEmbed)
 
     interaction.reply(`Volume set to **${queue.node.volume}%**`)

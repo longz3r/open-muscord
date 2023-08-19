@@ -1,6 +1,8 @@
 const { useQueue } = require("discord-player");
 const verifyQueue = require("../functions/verifyQueue")
 
+const logger = require("../handler/logHandler")
+
 async function resume(interaction) {
     if (!await verifyQueue(interaction.guildId)) {
         interaction.reply("No connection was found in this server, create one by using **/play** or **/join**")
@@ -17,7 +19,7 @@ async function resume(interaction) {
                 embeds: [currentMessageEmbed]
             })
         } catch (error) {
-            console.error(error)
+
         } 
         queue.node.setPaused(false)
         replyMessage = "Resuming"

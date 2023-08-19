@@ -33,10 +33,9 @@ const loop = new ButtonBuilder()
     .setEmoji("🔁")
 
 const queue = new ButtonBuilder()
-	.setCustomId('queue')
-    .setDisabled(true)
+	.setCustomId('lyrics')
 	.setStyle(ButtonStyle.Secondary)
-    .setEmoji("🗒️")
+    .setEmoji("🎵")
 
 const volumeDown = new ButtonBuilder()
 	.setCustomId('volumeDown')
@@ -54,6 +53,8 @@ const { InteractionCollector } = require("discord.js")
 const client = require("../../index")
 const buttonCollector = require("../../handler/buttonCollector")
 
+const logger = require("../../handler/logHandler")
+
 async function playerStart(queue, track) {
     let nowPlayingMessage
     try {
@@ -61,8 +62,8 @@ async function playerStart(queue, track) {
             embeds: [embeds.playerEmbed(track, queue)],
             components: [upperRow, bottomRow],
         })
-    } catch (e) {
-        console.error(e)
+    } catch (error) {
+        logger.error(error)
     }
 
     let queueMetadata = queue.metadata

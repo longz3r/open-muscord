@@ -19,7 +19,6 @@
   "homepage": "https://github.com/longz3r/open-muscord#readme",
   "dependencies": {
     "@discord-player/extractor": "^4.4.1",
-    "@discordjs/opus": "github:discordjs/opus",
     "@discordjs/voice": "^0.16.0",
     "deep-diff": "^1.0.2",
     "discord-player": "^6.6.2",

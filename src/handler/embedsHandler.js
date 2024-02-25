@@ -17,7 +17,7 @@ function playerEmbed(track, queue) {
         color: 0x00ffff,
         author: {
             name: 'Muscord',
-            icon_url: 'https://www.longcraft.xyz/muscord.png',
+            icon_url: 'https://cdn.longcloud.io.vn/muscord.png',
         },
         title: 'Now playing',
         thumbnail: {

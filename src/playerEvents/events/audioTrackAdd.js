@@ -1,7 +1,6 @@
 const updateMessage = require("../../functions/updateMessage")
 
 function audioTrackAdd(queue, track) {
-    console.log(queue.metadata.nowPlayingMessage)
     if (!queue.metadata.nowPlayingMessage) return
     try {
         let currentMessageEmbed = queue.metadata.nowPlayingMessage.embeds[0].data

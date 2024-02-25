@@ -3,6 +3,7 @@ function playerFinish(queue, track) {
     try {
         queueMetadata.buttonCollector.stop()
         queueMetadata.nowPlayingMessage.delete()
+        queueMetadata.nowPlayingMessage = undefined
     } catch (error) {
         // console.error(error)
     }

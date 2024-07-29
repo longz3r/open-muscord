@@ -12,7 +12,8 @@ const client = new Client({ partials: [Partials.Channel], intents: [
 const config = require("../config.json")
 
 const { Player } = require("discord-player")
-const { YoutubeExtractor, SpotifyExtractor, SoundCloudExtractor, BridgeProvider, BridgeSource } = require('@discord-player/extractor');
+const { SpotifyExtractor, SoundCloudExtractor, BridgeProvider, BridgeSource } = require('@discord-player/extractor');
+const { YoutubeiExtractor } = require("discord-player-youtubei")
 
 console.time("Discord login")
 
@@ -27,18 +28,11 @@ client.on('ready', async () => {
     console.time("Discord-player init")
     
     const discordplayer = new Player(client, {
-        ytdlOptions: {
-            requestOptions: {
-                Headers: {
-                    cookies: config.youtube_cookies
-                }
-            }
-        }
     });
 
     const bridgeProvider = new BridgeProvider(BridgeSource.YouTube)
 
-    await discordplayer.extractors.register(YoutubeExtractor, {});
+    await discordplayer.extractors.register(YoutubeiExtractor, {});
     await discordplayer.extractors.register(SoundCloudExtractor, {})
     await discordplayer.extractors.register(SpotifyExtractor, {
         bridgeProvider

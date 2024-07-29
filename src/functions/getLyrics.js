@@ -1,5 +1,3 @@
-const lyricsFinder = require("lyrics-finder")
-
 async function getLyrics(artist, title) {
     console.log(artist)
     console.log(title)
